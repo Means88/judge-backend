@@ -1,0 +1,7 @@
+.idea
+/media
+.DS_Store
+*.pyc
+/tmp
+db.sqlite3
+*.log
