@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
+from django.conf.urls.static import static
 from rest_framework import routers
 from django.conf import settings
 from problem.api import ProblemViewSet
+from config import views
 import django.views.static
 
 from submission.api import SubmissionViewSet
@@ -29,9 +31,27 @@ router.register('submission', SubmissionViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    re_path('^$', django.views.static.serve, {
+        'path': 'index.html',
+        'document_root': settings.REACT_BUILD_DIR,
+    }),
 ]
+
+ROOT_FILES = (
+    'index.html',
+    'manifest.json',
+    'asset-manifest.json',
+    'favicon.ico',
+    'service-worker.js',
+)
+
+urlpatterns += map(lambda f: path(f, django.views.static.serve, {
+    'path': f,
+    'document_root': settings.REACT_BUILD_DIR,
+}), ROOT_FILES)
 
 if settings.DEBUG:
     urlpatterns += [
-        path('media/<path:path>', django.views.static.serve, {'document_root': settings.MEDIA_ROOT})
+        path('media/<path:path>', django.views.static.serve, {'document_root': settings.MEDIA_ROOT}),
+        re_path('(static/)?<path:path>', django.views.static.serve, {'document_root': settings.REACT_BUILD_STATIC_DIR}),
     ]

@@ -120,6 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+REACT_BUILD_DIR = os.path.join(BASE_DIR, "../judge-front/build")
+REACT_BUILD_STATIC_DIR = os.path.join(BASE_DIR, "../judge-front/build/static")
+STATICFILES_DIRS = [
+    REACT_BUILD_DIR,
+    REACT_BUILD_STATIC_DIR,
+]
 
 LOGGING = {
     'version': 1,
