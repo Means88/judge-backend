@@ -40,8 +40,11 @@ yarn start
 
 ```
 
-### Preview
+## Preview
 
 ![problem](docs/problem.png)
 
 ![submission](docs/submission.png)
+
+## LICENSE
+MIT
