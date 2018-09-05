@@ -8,7 +8,7 @@ see [frontend](https://github.com/Means88/judge-frontend)
 - Docker
 - Python3.6
 - Node.js
-- redis
+- Redis
 
 ## Installation
 
