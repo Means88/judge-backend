@@ -38,6 +38,7 @@ def judge(submission_id):
     max_time = 15
     max_memory = 200
 
+    os.makedirs('tmp', 0o755, True)
     for test_data in test_data_list:
         prefix = 'judge_%s_%s' % (submission.id, test_data.id)
         src_path = os.path.join(settings.BASE_DIR, 'tmp', '%s_src' % prefix)

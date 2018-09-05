@@ -1,4 +1,5 @@
 #!/bin/sh
 
-python manage.py runserver 0:8000 &
-python -m celery -A config.celery worker --loglevel=info
+redis-server &
+python -m celery -A config.celery worker --loglevel=info &
+python manage.py runserver 0:8000
